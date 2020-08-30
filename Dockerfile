@@ -1,12 +1,12 @@
-FROM alpine:3.4
+FROM alpine
 MAINTAINER Senio Caires <seniocaires@gmail.com>
 
 RUN apk update
 RUN apk add git zip wget
 
 WORKDIR /opt
-RUN wget https://dist.apache.org/repos/dist/release/tomee/tomee-1.7.4/apache-tomee-1.7.4-plume.zip \
-    && unzip apache-tomee-1.7.4-plume.zip && rm apache-tomee-1.7.4-plume.zip
+RUN wget https://dist.apache.org/repos/dist/release/tomee/tomee-1.7.5/apache-tomee-1.7.5-plume.zip \
+    && unzip apache-tomee-1.7.5-plume.zip && rm apache-tomee-1.7.5-plume.zip
 
 RUN git clone https://github.com/seniocaires/zeus-report-web.git
 
@@ -91,9 +91,9 @@ WORKDIR /opt/zeus-report-web
 RUN mvn install
 
 WORKDIR /opt
-RUN cp zeus-report-web/target/zeus-report-web.war apache-tomee-plume-1.7.4/webapps/zeus-report-web.war
+RUN cp zeus-report-web/target/zeus-report-web.war apache-tomee-plume-1.7.5/webapps/zeus-report-web.war
 
-ENTRYPOINT ["/bin/bash", "-c", "/opt/apache-tomee-plume-1.7.4/bin/startup.sh && tail -f /dev/null"]
+ENTRYPOINT ["/bin/bash", "-c", "/opt/apache-tomee-plume-1.7.5/bin/startup.sh && tail -f /dev/null"]
 
 EXPOSE 8080
 
